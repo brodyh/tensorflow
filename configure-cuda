@@ -1,0 +1,22 @@
+#!/bin/bash
+
+## Set up Cuda-related environment settings
+
+CUDA_TOOLKIT_PATH=/usr/local/cuda
+CUDNN_INSTALL_PATH=/usr/local/cuda
+
+cat > third_party/gpus/cuda/cuda.config <<EOF
+# CUDA_TOOLKIT_PATH refers to the CUDA toolkit. Tensorflow requries Cuda 7.0
+# at the moment.
+CUDA_TOOLKIT_PATH="$CUDA_TOOLKIT_PATH"
+
+# CUDNN_INSTALL_PATH refers to the CUDNN toolkit. The cudnn header and library
+# files can be either in this directory, or under include/ and lib64/
+# directories separately.
+CUDNN_INSTALL_PATH="$CUDNN_INSTALL_PATH"
+EOF
+
+# Invoke the cuda_config.sh and set up the TensorFlow's canonical view of the Cuda libraries
+(cd third_party/gpus/cuda; ./cuda_config.sh;) || exit -1
+
+echo "Configuration finished"

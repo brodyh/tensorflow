@@ -1,3 +1,18 @@
+#Tensorflow with cuda/cudnn Docker container
+To run Tensorflow in an Docker container supporting cuda and cudnn R2, simply run:
+```bash
+$ ./docker-build.sh
+$ ./run.sh
+root@a269e8e886cb:/tensorflow# python tensorflow/models/image/mnist/convolutional.py
+...
+```
+
+This will create a docker image named `tensorflow:cuda` of size 5.07
+GB. This assumes you already have cuda 7.0 installed on your
+machine. If you have a different version of cuda installed, update the
+Dockerfile in this repo with the contents of Nvidia's Dockerfile in
+their repo (https://github.com/NVIDIA/nvidia-docker).
+
 #TensorFlow
 
 TensorFlow is an open source software library for numerical computation using
